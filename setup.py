@@ -1,5 +1,5 @@
 import pathlib
-from setuptools import setup
+from setuptools import setup, find_packages
 
 # The directory containing this file
 HERE = pathlib.Path(__file__).parent
@@ -15,7 +15,7 @@ setup(
     description="Interact with devices connected to the Tuya IOT platform through Python",
     long_description=README,
     long_description_content_type="text/markdown",
-    url="",
+    url="https://github.com/ASchoe311/TuyaPy",
     author="Adam Schoenfeld",
     author_email="aschoe@umich.edu",
     license=LICENSE,
@@ -24,7 +24,7 @@ setup(
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
     ],
-    packages=["TuyaAPI", "TuyaAPI.devices"],
+    packages=["TuyaPy", "TuyaPy.devices"],
     include_package_data=True,
     install_requires=["pycryptodome"]
 )

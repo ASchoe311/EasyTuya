@@ -1,0 +1,1 @@
+from TuyaPy.TuyaPy import TuyaAPI

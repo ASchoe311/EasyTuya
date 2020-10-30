@@ -1,2 +1,5 @@
 .vscode
 *.egg-info
+.git
+dist
+build

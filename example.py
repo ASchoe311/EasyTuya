@@ -1,5 +1,5 @@
-from TuyaAPI.TuyaAPI import TuyaAPI
-from TuyaAPI.devices import Lights
+from TuyaPy import TuyaAPI
+from TuyaPy.devices import Lights
 
 if __name__ == "__main__":
     api = TuyaAPI("9ea9sk54a0k2978837d6", "d6034d97286c4b049ee16874a5a2d92d")
