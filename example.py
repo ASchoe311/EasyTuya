@@ -19,6 +19,6 @@ if __name__ == "__main__":
         elif toDo.split()[0] == "bright":
             api.sendGroupCommand("BRLIGHTS", Lights.brightCommand(int(toDo.split()[1])))
         elif toDo == "onoff":
-                api.sendGroupCommand("BRLIGHTS", api.devices['BRLIGHTS'][0].toggleOnOff())
+            api.sendGroupCommand("BRLIGHTS", api.devices['BRLIGHTS'][0].toggleOnOff())
         elif toDo == "refresh":
             api.refreshAccessToken()
