@@ -10,7 +10,7 @@ LICENSE = (HERE / "license.txt").read_text()
 
 # This call to setup() does all the work
 setup(
-    name="PyTuyaAPI",
+    name="TuyaPy",
     version="0.1",
     description="Interact with devices connected to the Tuya IOT platform through Python",
     long_description=README,
@@ -20,7 +20,7 @@ setup(
     author_email="aschoe@umich.edu",
     license=LICENSE,
     classifiers=[
-        "License :: OSI Approved :: MIT License",
+        "License :: OSI Approved :: GNU GPLv3",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
     ],
