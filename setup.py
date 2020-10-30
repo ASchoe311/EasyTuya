@@ -103,6 +103,7 @@ setup(
     author_email=EMAIL,
     python_requires=REQUIRES_PYTHON,
     url=URL,
+	download_url = "https://github.com/ASchoe311/TuyaPy/archive/0.1.tar.gz",
     #packages=find_packages(exclude=["tests", "*.tests", "*.tests.*", "tests.*"]),
     # If your package is a single module, use this instead of 'packages':
     packages=['TuyaPy', 'TuyaPy.devices'],
@@ -120,7 +121,7 @@ setup(
         'License :: OSI Approved :: GNU GPLv3',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy'
     ],
