@@ -43,7 +43,7 @@ TuyaPy is a module containing nearly all needed functionality for interacting wi
 			elif toDo.split()[0] == "bright":
 				api.sendGroupCommand("BRLIGHTS", Lights.brightCommand(int(toDo.split()[1])))
 			elif toDo == "onoff":
-                api.sendGroupCommand("BRLIGHTS", api.devices['BRLIGHTS'][0].toggleOnOff())
+				api.sendGroupCommand("BRLIGHTS", api.devices['BRLIGHTS'][0].toggleOnOff())
 			elif toDo == "refresh":
 				api.refreshAccessToken()
 
