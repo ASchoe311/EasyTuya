@@ -17,7 +17,6 @@ if __name__ == "__main__":
         elif toDo == "rainbow":
             api.sendGroupCommand("BRLIGHTS", Lights.gorgCommand(255, 191))
         elif toDo.split()[0] == "bright":
-            print(toDo.split()[1])
             api.sendGroupCommand("BRLIGHTS", Lights.brightCommand(int(toDo.split()[1])))
         elif toDo == "onoff":
                 api.sendGroupCommand("BRLIGHTS", api.devices['BRLIGHTS'][0].toggleOnOff())
