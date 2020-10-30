@@ -13,16 +13,13 @@ if __name__ == "__main__":
         elif toDo == "off":
             api.sendGroupCommand("BRLIGHTS", Lights.offCommand())
         elif toDo == "white":
-            api.sendGroupCommand("BRLIGHTS", Lights.whiteCommand())
+            api.sendGroupCommand("BRLIGHTS", Lights.colorCommand("white"))
         elif toDo == "rainbow":
-            api.sendGroupCommand("BRLIGHTS", Lights.gorgCommand())
+            api.sendGroupCommand("BRLIGHTS", Lights.gorgCommand(255, 191))
         elif toDo.split()[0] == "bright":
             print(toDo.split()[1])
             api.sendGroupCommand("BRLIGHTS", Lights.brightCommand(int(toDo.split()[1])))
         elif toDo == "onoff":
-            if(api.devices['BRLIGHTS'][0].isOn == False):
-                api.sendGroupCommand("BRLIGHTS", Lights.onCommand())
-            else:
-                api.sendGroupCommand("BRLIGHTS", Lights.offCommand())
+                api.sendGroupCommand("BRLIGHTS", api.devices['BRLIGHTS'][0].toggleOnOff())
         elif toDo == "refresh":
             api.refreshAccessToken()

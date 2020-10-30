@@ -9,8 +9,10 @@ blueHSV = {'h': 240, 's': 255, 'v': 255}
 purpleHSV = {'h': 300, 's': 255, 'v': 255}
 whiteHSV = {'h': 0, 's': 0, 'v': 255}
 
-def whiteCommand():
-    return {'commands': [{'code': 'work_mode', 'value': 'white'}]}
+rainbowHSV = [redHSV, yellowHSV, greenHSV, skyHSV, blueHSV, purpleHSV]
+
+def colorCommand(color = "white"):
+    return {'commands': [{'code': 'work_mode', 'value': color}]}
     
 def brightCommand(newBright):
     return {'commands': [{'code': 'bright_value', 'value': newBright}]}
@@ -21,15 +23,13 @@ def onCommand():
 def offCommand():
     return {'commands': [{'code': 'switch_led', 'value': False}]}
 
-def gorgCommand():
+def gorgCommand(bright = 255, freq = 191, hsvList = rainbowHSV):
     return {'commands': [{
                 "code": "flash_scene_4",
                 "value": {
-                    "bright": 255,
-                    "frequency": 191,
-                    "hsv": [
-                        redHSV, yellowHSV, greenHSV, skyHSV, blueHSV, purpleHSV
-                    ],
+                    "bright": bright,
+                    "frequency": freq,
+                    "hsv": hsvList,
                     "temperature": 0
                 }
             }]}
@@ -44,7 +44,7 @@ class Light:
         self.workMode = None
         self.brightness = 0
 
-    def toggleOnOff():
+    def toggleOnOff(self):
         if self.isOn:
             return offCommand()
         else:
