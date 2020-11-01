@@ -18,7 +18,7 @@ URL = 'https://github.com/ASchoe311/EasyTuya'
 EMAIL = 'aschoe@umich.edu'
 AUTHOR = 'Adam Schoenfeld'
 REQUIRES_PYTHON = '>=3.6.0'
-VERSION = '0.1.22'
+VERSION = '0.1.23'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
@@ -37,13 +37,8 @@ EXTRAS = {
 
 here = os.path.abspath(os.path.dirname(__file__))
 
-# Import the README and use it as the long-description.
-# Note: this will only work if 'README.md' is present in your MANIFEST.in file!
-try:
-    with io.open(os.path.join(here, 'README.md'), encoding='utf-8') as f:
-        long_description = '\n' + f.read()
-except FileNotFoundError:
-    long_description = DESCRIPTION
+with open("README.md", "r") as fh:
+    long_description = fh.read()
 
 # Load the package's __version__.py module as a dictionary.
 about = {}
@@ -85,9 +80,10 @@ class UploadCommand(Command):
         self.status('Uploading the package to PyPI via Twine…')
         os.system('twine upload dist/*')
 
-        self.status('Pushing git tags…')
-        os.system('git tag v{0}'.format(about['__version__']))
-        os.system('git push --tags')
+        self.status('Pushing git')
+        os.system('git stage -A')
+        os.system('git commit -m \"New PyPi release\"')
+        os.system('git push')
 
         sys.exit()
 
