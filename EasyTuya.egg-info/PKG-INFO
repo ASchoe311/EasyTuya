@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: EasyTuya
-Version: 0.1.2
+Version: 0.1.21
 Summary: Interact with devices connected to the Tuya IOT platform through Python
 Home-page: https://github.com/ASchoe311/EasyTuya
 Author: Adam Schoenfeld
@@ -54,7 +54,7 @@ Description:
         				# where val is in the range 25 <= val <= 255
         				api.sendGroupCommand("LIGHTS", Lights.brightCommand(int(toDo.split()[1])))
         			elif toDo == "onoff":
-        				api.sendGroupCommand("LIGHTS", api.devices['BRLIGHTS'][0].toggleOnOff())
+        				api.sendGroupCommand("LIGHTS", api.devices['LIGHTS'][0].toggleOnOff())
         			elif toDo == "refresh":
         				api.refreshAccessToken()
                        

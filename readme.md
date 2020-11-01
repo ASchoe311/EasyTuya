@@ -45,7 +45,7 @@ EasyTuya is a module containing nearly all needed functionality for interacting 
 				# where val is in the range 25 <= val <= 255
 				api.sendGroupCommand("LIGHTS", Lights.brightCommand(int(toDo.split()[1])))
 			elif toDo == "onoff":
-				api.sendGroupCommand("LIGHTS", api.devices['BRLIGHTS'][0].toggleOnOff())
+				api.sendGroupCommand("LIGHTS", api.devices['LIGHTS'][0].toggleOnOff())
 			elif toDo == "refresh":
 				api.refreshAccessToken()
                
