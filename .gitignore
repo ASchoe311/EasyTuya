@@ -1,2 +1,5 @@
 .vscode
 .git
+EasyTuya.egg-info
+dist
+build
