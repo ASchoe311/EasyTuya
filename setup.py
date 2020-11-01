@@ -12,10 +12,10 @@ from shutil import rmtree
 from setuptools import find_packages, setup, Command
 
 # Package meta-data.
-NAME = 'TuyaPy'
+NAME = 'EasyTuya'
 DESCRIPTION = 'Interact with devices connected to the Tuya IOT platform through Python'
-URL = 'https://github.com/ASchoe311/TuyaPy'
-EMAIL = 'aschoe@umich'
+URL = 'https://github.com/ASchoe311/EasyTuya'
+EMAIL = 'aschoe@umich.edu'
 AUTHOR = 'Adam Schoenfeld'
 REQUIRES_PYTHON = '>=3.6.0'
 VERSION = '0.1.0'
@@ -103,10 +103,10 @@ setup(
     author_email=EMAIL,
     python_requires=REQUIRES_PYTHON,
     url=URL,
-	download_url = "https://github.com/ASchoe311/TuyaPy/archive/0.1.tar.gz",
+	#download_url = "https://github.com/ASchoe311/TuyaPy/archive/0.1.tar.gz",
     #packages=find_packages(exclude=["tests", "*.tests", "*.tests.*", "tests.*"]),
     # If your package is a single module, use this instead of 'packages':
-    packages=['TuyaPy', 'TuyaPy.devices'],
+    packages=['EasyTuya', 'EasyTuya.devices'],
 
     # entry_points={
     #     'console_scripts': ['mycli=mymodule:cli'],
@@ -118,12 +118,13 @@ setup(
     classifiers=[
         # Trove classifiers
         # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
-        'License :: OSI Approved :: GNU GPLv3',
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: Implementation :: CPython',
-        'Programming Language :: Python :: Implementation :: PyPy'
+        'Programming Language :: Python :: Implementation :: PyPy',
+		'Development Status :: 1 - Planning'
     ],
     # $ setup.py publish support.
     cmdclass={

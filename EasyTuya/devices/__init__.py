@@ -1,0 +1,1 @@
+from EasyTuya.devices import Lights
