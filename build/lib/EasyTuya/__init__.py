@@ -1,0 +1,1 @@
+from EasyTuya.EasyTuya import TuyaAPI
