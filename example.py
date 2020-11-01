@@ -1,7 +1,6 @@
+# A simple program to control a group of lights through command line input
 from EasyTuya import TuyaAPI
 from EasyTuya.devices import Lights
-
-# A simple program to control a group of lights through command line input
 
 if __name__ == "__main__":
     api = TuyaAPI("your_client_id", "your_access_secret")
@@ -19,6 +18,8 @@ if __name__ == "__main__":
         elif toDo == "rainbow":
             api.sendGroupCommand("LIGHTS", Lights.gorgCommand(255, 191))
         elif toDo.split()[0] == "bright":
+				# Expecting input to be in the form of "bright [val]"
+				# where val is in the range 25 <= val <= 255
             api.sendGroupCommand("LIGHTS", Lights.brightCommand(int(toDo.split()[1])))
         elif toDo == "onoff":
             api.sendGroupCommand("LIGHTS", api.devices['BRLIGHTS'][0].toggleOnOff())
