@@ -24,7 +24,7 @@ EasyTuya is a module containing nearly all needed functionality for interacting 
 ### A simple program to control a group of lights through command line input
 	from EasyTuya import TuyaAPI
 	from EasyTuya.devices import Lights
-
+	
 	if __name__ == "__main__":
 	    api = TuyaAPI("your_client_id", "your_access_secret")
 	    l1 = Lights.Light("your_device_id_1", "Light 1")
@@ -49,12 +49,10 @@ EasyTuya is a module containing nearly all needed functionality for interacting 
 	        elif toDo.split()[0] == "bright":
 	            api.sendCommands("LIGHTS", Lights.brightnessCommand(int(toDo.split()[1])))
 	        elif toDo == "onoff":
-	            if(api.devices['LIGHTS'][0].isOn == False):
-	                api.sendCommands("LIGHTS", Lights.onCommand())
-	            else:
-	                api.sendCommands("LIGHTS", Lights.offCommand())
+	            api.sendCommands("LIGHTS", api.devices['LIGHTS'][0].toggleOnOff())
 	        elif toDo == "status":
 	            print(api.getStatus("LIGHTS"))
+
                
 # Other Notes
 ### Finding Device IDs

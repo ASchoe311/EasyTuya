@@ -26,9 +26,6 @@ if __name__ == "__main__":
         elif toDo.split()[0] == "bright":
             api.sendCommands("LIGHTS", Lights.brightnessCommand(int(toDo.split()[1])))
         elif toDo == "onoff":
-            if(api.devices['LIGHTS'][0].isOn == False):
-                api.sendCommands("LIGHTS", Lights.onCommand())
-            else:
-                api.sendCommands("LIGHTS", Lights.offCommand())
+            api.sendCommands("LIGHTS", api.devices['LIGHTS'][0].toggleOnOff())
         elif toDo == "status":
             print(api.getStatus("LIGHTS"))
