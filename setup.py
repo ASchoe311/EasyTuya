@@ -80,10 +80,10 @@ class UploadCommand(Command):
         self.status('Uploading the package to PyPI via Twine…')
         os.system('twine upload dist/*')
 
-        self.status('Pushing git')
-        os.system('git stage -A')
-        os.system('git commit -m \"New PyPi release\"')
-        os.system('git push')
+        # self.status('Pushing git')
+        # os.system('git stage -A')
+        # os.system('git commit -m \"New PyPi release\"')
+        # os.system('git push')
 
         sys.exit()
 
