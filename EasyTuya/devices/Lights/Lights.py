@@ -11,10 +11,22 @@ whiteHSV = {'h': 0, 's': 0, 'v': 255}
 
 rainbowHSV = [redHSV, yellowHSV, greenHSV, skyHSV, blueHSV, purpleHSV]
 
-def colorCommand(color = "white"):
-    return {'commands': [{'code': 'work_mode', 'value': color}]}
+def workModeCommand(wMode = "white"):
+    return {'commands': [{'code': 'work_mode', 'value': wMode}]}
+
+def colorCommand(colorHSV = whiteHSV):
+    if type(colorHSV) is not dict or 'h' not in colorHSV.keys() or 's' not in colorHSV.keys() or 'v' not in colorHSV.keys():
+        raise Exception("Colors must be given as HSV in the form {'h': h, 's': s, 'v', v}")
+    return {'commands': [{'code': 'colour_data', 'value': colorHSV}]}
+
+def temperatureCommand(newTemperature):
+    if newTemperature < 25 or newTemperature > 255:
+        raise Exception("Values for temperature must be within the range [25,255], inclusive")
+    return {'commands': [{'code': 'temp_value', 'value': newTemperature}]}
     
-def brightCommand(newBright):
+def brightnessCommand(newBright):
+    if newBright < 25 or newBright > 255:
+        raise Exception("Values for brightness must be within the range [25,255], inclusive")
     return {'commands': [{'code': 'bright_value', 'value': newBright}]}
 
 def onCommand():
@@ -23,9 +35,10 @@ def onCommand():
 def offCommand():
     return {'commands': [{'code': 'switch_led', 'value': False}]}
 
-def gorgCommand(bright = 255, freq = 191, hsvList = rainbowHSV):
+def sceneCommand(sceneNum = 4, bright = 255, freq = 191, hsvList = rainbowHSV):
+    cmdCode = "flash_scene_" + str(sceneNum)
     return {'commands': [{
-                "code": "flash_scene_4",
+                "code": cmdCode,
                 "value": {
                     "bright": bright,
                     "frequency": freq,
@@ -60,7 +73,7 @@ class Light:
         except Exception as e:
             raise
         else:
-            print(f"Ran command successfully:\n{command} on device named {self.name}")
+            #print(f"Ran command successfully:\n{command} on device named {self.name}")
             if command['commands'][0]['code'] == "switch_led":
                 self.isOn = not self.isOn
             elif command['commands'][0]['code'] == "work_mode" or command['commands'][0]['code'].find("scene") != -1:

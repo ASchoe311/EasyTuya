@@ -18,7 +18,7 @@ URL = 'https://github.com/ASchoe311/EasyTuya'
 EMAIL = 'aschoe@umich.edu'
 AUTHOR = 'Adam Schoenfeld'
 REQUIRES_PYTHON = '>=3.6.0'
-VERSION = '0.1.23'
+VERSION = '0.1.3'
 
 # What packages are required for this module to be executed?
 REQUIRED = [

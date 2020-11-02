@@ -10,18 +10,25 @@ if __name__ == "__main__":
     while(True):
         toDo = input()
         if toDo == "on":
-            api.sendGroupCommand("LIGHTS", Lights.onCommand())
+            api.sendCommands("LIGHTS", Lights.onCommand())
         elif toDo == "off":
-            api.sendGroupCommand("LIGHTS", Lights.offCommand())
+            api.sendCommands("LIGHTS", Lights.offCommand())
         elif toDo == "white":
-            api.sendGroupCommand("LIGHTS", Lights.colorCommand("white"))
+            api.sendCommands("LIGHTS", Lights.workModeCommand("white"))
+        elif toDo == "color":
+            api.sendCommands("LIGHTS", Lights.workModeCommand("colour"))
+        elif toDo == "red":
+            api.sendCommands("LIGHTS", Lights.colorCommand(Lights.redHSV))
+        elif toDo == "blue":
+            api.sendCommands("LIGHTS", Lights.colorCommand(Lights.blueHSV))
         elif toDo == "rainbow":
-            api.sendGroupCommand("LIGHTS", Lights.gorgCommand(255, 191))
+            api.sendCommands("LIGHTS", Lights.sceneCommand(4))
         elif toDo.split()[0] == "bright":
-				# Expecting input to be in the form of "bright [val]"
-				# where val is in the range 25 <= val <= 255
-            api.sendGroupCommand("LIGHTS", Lights.brightCommand(int(toDo.split()[1])))
+            api.sendCommands("LIGHTS", Lights.brightnessCommand(int(toDo.split()[1])))
         elif toDo == "onoff":
-            api.sendGroupCommand("LIGHTS", api.devices['LIGHTS'][0].toggleOnOff())
-        elif toDo == "refresh":
-            api.refreshAccessToken()
+            if(api.devices['LIGHTS'][0].isOn == False):
+                api.sendCommands("LIGHTS", Lights.onCommand())
+            else:
+                api.sendCommands("LIGHTS", Lights.offCommand())
+        elif toDo == "status":
+            print(api.getStatus("LIGHTS"))

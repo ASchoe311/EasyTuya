@@ -22,14 +22,19 @@ class TuyaAPI:
             self.APIHeader = {'client_id': self.clientID, 'sign': signature, 'sign_method': "HMAC-SHA256", 't': t}
             resp = r.get(url="https://openapi.tuyaus.com/v1.0/token?grant_type=1", headers=self.APIHeader).json()
             self.tokenTimeLeft = resp['result']['expire_time']
+            self.tokenGetTime = time.time()
             self.printConvertedTimeLeft(self.tokenTimeLeft)
             self.refreshToken = resp['result']['refresh_token']
             self.APIHeader['access_token'] = resp['result']['access_token']
-            t = str(time.time() * 1000)[:13]
-            self.APIHeader['sign'] = HMAC.new(str.encode(self.accessKey), str.encode(self.clientID + self.APIHeader['access_token'] + t), digestmod=SHA256).hexdigest().upper()
-            self.APIHeader['t'] = t
+            self.refreshSignature()
         except Exception as e:
             raise
+
+    def refreshSignature(self):
+        t = str(time.time() * 1000)[:13]
+        self.APIHeader['sign'] = HMAC.new(str.encode(self.accessKey), str.encode(self.clientID + self.APIHeader['access_token'] + t), digestmod=SHA256).hexdigest().upper()
+        self.APIHeader['t'] = t
+        self.signatureGetTime = time.time()
 
     # Refresh access token for API, must be done at least every 2 hours
     def refreshAccessToken(self):
@@ -40,15 +45,13 @@ class TuyaAPI:
             refURL = "https://openapi.tuyaus.com/v1.0/token/" + self.refreshToken
             resp = r.get(url=refURL, headers=self.APIHeader, params=None).json()
             self.tokenTimeLeft = resp['result']['expire_time']
+            self.tokenGetTime = time.time()
             self.printConvertedTimeLeft(self.tokenTimeLeft)
             self.refreshToken = resp['result']['refresh_token']
             self.APIHeader['access_token'] = resp['result']['access_token']
-            t = str(time.time() * 1000)[:13]
-            self.APIHeader['sign'] = HMAC.new(str.encode(self.accessKey), str.encode(self.clientID + self.APIHeader['access_token'] + t), digestmod=SHA256).hexdigest().upper()
-            self.APIHeader['t'] = t
+            refreshSignature()
         except Exception as e:
-            print(resp, e)
-            #raise
+            raise
 
     def printConvertedTimeLeft(self, seconds):
 	    hours = int(seconds / 3600)
@@ -56,40 +59,59 @@ class TuyaAPI:
 	    seconds = seconds % 60
 	    print(f"Time until key expiry: {hours} Hours, {minutes} Minutes, {seconds} Seconds")
     
-    def addDevice(self, device, deviceGroup):
-        if deviceGroup not in self.devices.keys():
-            self.devices[deviceGroup] = [device]
+    def addDevice(self, device, deviceIdentifier):
+        if deviceIdentifier not in self.devices.keys():
+            self.devices[deviceIdentifier] = [device]
         else:
-            self.devices[deviceGroup].append(device)
+            self.devices[deviceIdentifier].append(device)
 
-    def addDevices(self, devices, deviceGroup):
+    def addDeviceGroup(self, devices, groupIdentifier):
         if type(devices) is not list:
             raise Exception("ERROR: Type of \"devices\" argument must be \"list\"")
-        elif deviceGroup not in self.devices.keys():
-            self.devices[deviceGroup] = devices
+        elif groupIdentifier not in self.devices.keys():
+            self.devices[groupIdentifier] = devices
         else:
-            self.devices[deviceGroup] = self.devices[deviceGroup] + devices
-
-    def sendGroupCommand(self, destGroup, commands):
-        if type(destGroup) is not str:
-            raise Exception("ERROR: destination group must be passed as string")
-        elif destGroup not in self.devices.keys():
-            raise Exception("ERROR: destination group must correspond to a group added with addDevice() or addDevices()")
-        else:
-            try:
-                for d in self.devices[destGroup]:
-                    d.postCommand(self.APIHeader, commands)
-            except Exception as e:
-                if str(e).find("ERROR: Command failed") != -1:
-                    self.refreshAccessToken()
-                    self.sendGroupCommand(destGroup, commands)
-                else: raise
-
-    def sendIndivCommand(self, destDevice, commands):
+            self.devices[groupIdentifier] = self.devices[groupIdentifier] + devices
+    
+    def sendCommands(self, destIdentifier, commands):
+        if time.time() - self.tokenGetTime >= self.tokenTimeLeft:
+            self.refreshAccessToken()
+        elif time.time() - self.signatureGetTime >= 600:
+            self.refreshSignature()
+        if type(destIdentifier) is not str:
+            raise Exception("ERROR: Command destination identifier must be passed as string")
+        if destIdentifier not in self.devices.keys():
+            raise Exception("ERROR: Command destination identifier must correspond to a device or group of devices added with addDevice() or addDeviceGroup()")
         try:
-            destDevice.postCommand(self.APIHeader, commands)
+            if type(self.devices[destIdentifier]) != list:
+                self.devices[deviceIdentifier].postCommand(self.APIHeader, commands)
+            else:
+                for d in self.devices[destIdentifier]:
+                    d.postCommand(self.APIHeader, commands)
         except Exception as e:
-            if str(e).find("ERROR: Command failed") != -1:
-                self.refreshAccessToken()
-                self.sendIndivCommand(destDevice, commands)
-            else: raise
+            raise
+    
+    def getStatus(self, destIdentifier):
+        if time.time() - self.tokenGetTime >= self.tokenTimeLeft:
+            self.refreshAccessToken()
+        elif time.time() - self.signatureGetTime >= 600:
+            self.refreshSignature()
+        if type(destIdentifier) is not str:
+            raise Exception("ERROR: Status destination identifier must be passed as string")
+        if destIdentifier not in self.devices.keys():
+            raise Exception("ERROR: Status destination identifier must correspond to a device or group of devices added with addDevice() or addDeviceGroup()")
+        try:
+            statusURL = "https://openapi.tuyaus.com/v1.0/devices/[id]/status"
+            if type(self.devices[destIdentifier]) != list:
+                thisURL = statusURL.replace('[id]', self.devices[deviceIdentifier].id)
+                resp = r.get(thisURL, headers=self.APIHeader).json()
+                return resp
+            else:
+                statusList = {}
+                for d in self.devices[destIdentifier]:
+                    thisURL = statusURL.replace('[id]', d.id)
+                    resp = r.get(thisURL, headers=self.APIHeader).json()
+                    statusList[d.name] = resp
+                return statusList
+        except Exception as e:
+            raise
