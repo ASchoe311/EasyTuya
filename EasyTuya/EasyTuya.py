@@ -59,13 +59,16 @@ class TuyaAPI:
 	    seconds = seconds % 60
 	    print(f"Time until key expiry: {hours} Hours, {minutes} Minutes, {seconds} Seconds")
     
-    def addDevice(self, device, deviceIdentifier):
-        if deviceIdentifier not in self.devices.keys():
-            self.devices[deviceIdentifier] = [device]
+    def addDevices(self, devices, identifier):
+        if type(devices) is list:
+            self.__addDeviceGroup(devices, identifier)
+        elif identifier not in self.devices.keys():
+            self.devices[identifier] = [device]
         else:
-            self.devices[deviceIdentifier].append(device)
+            self.devices[identifier].append(device)
+        self.__initStatus(identifier)
 
-    def addDeviceGroup(self, devices, groupIdentifier):
+    def __addDeviceGroup(self, devices, groupIdentifier):
         if type(devices) is not list:
             raise Exception("ERROR: Type of \"devices\" argument must be \"list\"")
         elif groupIdentifier not in self.devices.keys():
@@ -90,7 +93,16 @@ class TuyaAPI:
                     d.postCommand(self.APIHeader, commands)
         except Exception as e:
             raise
-    
+
+    def __initStatus(self, destID):
+        try:
+            statuses = self.getStatus(destID)
+        except Exception as e:
+            raise Exception("Something went wrong while initializing your devices")
+        else:
+            for d in statuses.keys():
+                d.setStatusInfo(statuses[d])
+
     def getStatus(self, destIdentifier):
         if time.time() - self.tokenGetTime >= self.tokenTimeLeft:
             self.refreshAccessToken()
@@ -105,13 +117,13 @@ class TuyaAPI:
             if type(self.devices[destIdentifier]) != list:
                 thisURL = statusURL.replace('[id]', self.devices[deviceIdentifier].id)
                 resp = r.get(thisURL, headers=self.APIHeader).json()
-                return resp
+                return {self.devices[deviceIdentifier]: resp['result']}
             else:
                 statusList = {}
                 for d in self.devices[destIdentifier]:
                     thisURL = statusURL.replace('[id]', d.id)
                     resp = r.get(thisURL, headers=self.APIHeader).json()
-                    statusList[d.name] = resp
+                    statusList[d] = resp['result']
                 return statusList
         except Exception as e:
             raise

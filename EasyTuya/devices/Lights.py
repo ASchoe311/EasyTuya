@@ -81,4 +81,14 @@ class Light:
             elif command['commands'][0]['code'] == "bright_value":
                 self.brightness = command['commands'][0]['value']
 
+    def setStatusInfo(self, statusInfo):
+        self.isOn = statusInfo[0]['value']
+        self.workMode = statusInfo[1]['value']
+        self.brightness = statusInfo[2]['value']
+
+    def __str__(self):
+        return self.name
+    
+    def __repr__(self):
+        return self.name
         
