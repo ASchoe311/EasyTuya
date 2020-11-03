@@ -1,10 +1,13 @@
 # EasyTuya - Making IOT Control With Python Easy
 
-EasyTuya is a module containing nearly all needed functionality for interacting with your Tuya powered IOT devices through Python. This is done using [Tuya's web API](https://developer.tuya.com/en/docs/iot/open-api/api-list/api?id=K989ru6gtvspg), meaning that for this module to work you will need a cloud developer account on Tuya's website. Full instructions for this and general setup can be found below. If you have not already, to use this you must also download the TuyaSmart app on your phone and add your compatible devices.
+EasyTuya is a package containing nearly all needed functionality for interacting with your Tuya powered IOT devices through Python. This is done using [Tuya's web API](https://developer.tuya.com/en/docs/iot/open-api/api-list/api?id=K989ru6gtvspg), meaning that for this module to work you will need a cloud developer account on Tuya's website. Full instructions for this and general setup can be found below. If you have not already, to use this you must also download the TuyaSmart app on your phone and add your compatible devices.
+
+## Full documentation for this package can be found [here](https://aschoe311.github.io/EasyTuya/)
 
 # Installation
 
     pip3 install EasyTuya
+	
 ### Requirements
 
  - [pycryptodome](https://pypi.org/project/pycryptodome/)
@@ -21,9 +24,8 @@ EasyTuya is a module containing nearly all needed functionality for interacting 
  - Click "API Group" in the left sidebar, then click "Apply" on the groups: "Authorization Management", "Device Management", and "Device Control"
  - Open other API group as needed by your usage
   
-# Usage
-## Full documentation can be found [here](https://aschoe311.github.io/EasyTuya/)
-### Usage example: A simple program to control a group of lights through command line input
+# Usage example
+## A simple program to control a group of lights through command line input
 	from EasyTuya import TuyaAPI
 	from EasyTuya.devices import Lights
 	
