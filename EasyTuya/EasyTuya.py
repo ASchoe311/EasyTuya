@@ -23,20 +23,22 @@ class TuyaAPI:
             resp = r.get(url="https://openapi.tuyaus.com/v1.0/token?grant_type=1", headers=self.APIHeader).json()
             self.tokenTimeLeft = resp['result']['expire_time']
             self.tokenGetTime = time.time()
-            self.printConvertedTimeLeft(self.tokenTimeLeft)
+            #self.printConvertedTimeLeft(self.tokenTimeLeft)
             self.refreshToken = resp['result']['refresh_token']
             self.APIHeader['access_token'] = resp['result']['access_token']
             self.refreshSignature()
         except Exception as e:
             raise
 
+    # Refreshes the signature in the API head with a new time
+    # Needs to be done approximately every 10-20 minutes
     def refreshSignature(self):
         t = str(time.time() * 1000)[:13]
         self.APIHeader['sign'] = HMAC.new(str.encode(self.accessKey), str.encode(self.clientID + self.APIHeader['access_token'] + t), digestmod=SHA256).hexdigest().upper()
         self.APIHeader['t'] = t
         self.signatureGetTime = time.time()
 
-    # Refresh access token for API, must be done at least every 2 hours
+    # Refresh access token for API, must be done every 2 hours to maintain API access
     def refreshAccessToken(self):
         try:
             t = str(time.time() * 1000)[:13]
@@ -46,35 +48,31 @@ class TuyaAPI:
             resp = r.get(url=refURL, headers=self.APIHeader, params=None).json()
             self.tokenTimeLeft = resp['result']['expire_time']
             self.tokenGetTime = time.time()
-            self.printConvertedTimeLeft(self.tokenTimeLeft)
+            #self.printConvertedTimeLeft(self.tokenTimeLeft)
             self.refreshToken = resp['result']['refresh_token']
             self.APIHeader['access_token'] = resp['result']['access_token']
             refreshSignature()
         except Exception as e:
             raise
 
-    def printConvertedTimeLeft(self, seconds):
-	    hours = int(seconds / 3600)
-	    minutes = int((seconds / 60) - hours * 60)
-	    seconds = seconds % 60
+    # Prints the amount of time left until access token must be refreshed
+    def printConvertedTimeLeft(self):
+	    hours = int(self.tokenTimeLeft / 3600)
+	    minutes = int((self.tokenTimeLeft / 60) - hours * 60)
+	    seconds = self.tokenTimeLeft % 60
 	    print(f"Time until key expiry: {hours} Hours, {minutes} Minutes, {seconds} Seconds")
     
+    # Takes in either a single device or a list of devices
+    # Devices are objects defined in EasyTuya.devices such as Lights
     def addDevices(self, devices, identifier):
-        if type(devices) is list:
-            self.__addDeviceGroup(devices, identifier)
-        elif identifier not in self.devices.keys():
-            self.devices[identifier] = [device]
+        if identifier not in self.devices.keys():
+            self.devices[identifier] = devices
         else:
-            self.devices[identifier].append(device)
+            if type(devices) is not list:
+                self.devices[identifier].append(devices)
+            else:
+                self.devices[identifier] += devices
         self.__initStatus(identifier)
-
-    def __addDeviceGroup(self, devices, groupIdentifier):
-        if type(devices) is not list:
-            raise Exception("ERROR: Type of \"devices\" argument must be \"list\"")
-        elif groupIdentifier not in self.devices.keys():
-            self.devices[groupIdentifier] = devices
-        else:
-            self.devices[groupIdentifier] = self.devices[groupIdentifier] + devices
     
     def sendCommands(self, destIdentifier, commands):
         if time.time() - self.tokenGetTime >= self.tokenTimeLeft:
@@ -87,7 +85,7 @@ class TuyaAPI:
             raise Exception("ERROR: Command destination identifier must correspond to a device or group of devices added with addDevice() or addDeviceGroup()")
         try:
             if type(self.devices[destIdentifier]) != list:
-                self.devices[deviceIdentifier].postCommand(self.APIHeader, commands)
+                self.devices[destIdentifier].postCommand(self.APIHeader, commands)
             else:
                 for d in self.devices[destIdentifier]:
                     d.postCommand(self.APIHeader, commands)
@@ -115,9 +113,9 @@ class TuyaAPI:
         try:
             statusURL = "https://openapi.tuyaus.com/v1.0/devices/[id]/status"
             if type(self.devices[destIdentifier]) != list:
-                thisURL = statusURL.replace('[id]', self.devices[deviceIdentifier].id)
+                thisURL = statusURL.replace('[id]', self.devices[destIdentifier].id)
                 resp = r.get(thisURL, headers=self.APIHeader).json()
-                return {self.devices[deviceIdentifier]: resp['result']}
+                return {self.devices[destIdentifier]: resp['result']}
             else:
                 statusList = {}
                 for d in self.devices[destIdentifier]:
