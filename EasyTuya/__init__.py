@@ -1,1 +1,1 @@
-from EasyTuya.EasyTuya import TuyaAPI
+from EasyTuya.TuyaAPI import TuyaAPI

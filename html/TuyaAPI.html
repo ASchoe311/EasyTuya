@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.1" />
+<title>EasyTuya.TuyaAPI API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>EasyTuya.TuyaAPI</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import requests as r
+import time
+from Crypto.Hash import HMAC, SHA256
+import json
+
+class TuyaAPI:
+
+    def __init__(self):
+        self.clientID = None
+        self.__accessKey = None
+        self.__APIHeader = {&#39;client_id&#39;: None, &#39;sign&#39;: None, &#39;sign_method&#39;: &#34;HMAC-SHA256&#34;, &#39;t&#39;: None}
+        self.devices = {}
+
+    def __init__(self, id: str, secret: str):
+        &#34;&#34;&#34;Initialize a connection with the Tuya API
+
+        Args:
+            id (str): Your Tuya developer account client id
+            secret (str): Your Tuya developer account access secret
+        &#34;&#34;&#34;
+        self.clientID = id
+        self.__accessKey = secret
+        self.devices = {}
+        try:
+            t = str(time.time() * 1000)[:13]
+            signature = HMAC.new(str.encode(self.__accessKey), str.encode(self.clientID + t), digestmod=SHA256).hexdigest().upper()
+            self.__APIHeader = {&#39;client_id&#39;: self.clientID, &#39;sign&#39;: signature, &#39;sign_method&#39;: &#34;HMAC-SHA256&#34;, &#39;t&#39;: t}
+            resp = r.get(url=&#34;https://openapi.tuyaus.com/v1.0/token?grant_type=1&#34;, headers=self.__APIHeader).json()
+            self.tokenTimeLeft = resp[&#39;result&#39;][&#39;expire_time&#39;]
+            self.tokenGetTime = time.time()
+            self.refreshToken = resp[&#39;result&#39;][&#39;refresh_token&#39;]
+            self.__APIHeader[&#39;access_token&#39;] = resp[&#39;result&#39;][&#39;access_token&#39;]
+            self.refreshSignature()
+        except Exception as e:
+            raise
+
+    def refreshSignature(self):
+        &#34;&#34;&#34;
+        Refreshes the signature in the API head with a new time
+        Needs to be done approximately every 10-20 minutes
+        &#34;&#34;&#34;
+        t = str(time.time() * 1000)[:13]
+        self.__APIHeader[&#39;sign&#39;] = HMAC.new(str.encode(self.__accessKey), str.encode(self.clientID + self.__APIHeader[&#39;access_token&#39;] + t), digestmod=SHA256).hexdigest().upper()
+        self.__APIHeader[&#39;t&#39;] = t
+        self.signatureGetTime = time.time()
+
+    def refreshAccessToken(self):
+        &#34;&#34;&#34;
+        Refresh access token for API
+        Must be done every 2 hours to maintain API access
+        &#34;&#34;&#34;
+        try:
+            t = str(time.time() * 1000)[:13]
+            signature = HMAC.new(str.encode(self.__accessKey), str.encode(self.clientID + t), digestmod=SHA256).hexdigest().upper()
+            self.__APIHeader = {&#39;client_id&#39;: self.clientID, &#39;sign&#39;: signature, &#39;sign_method&#39;: &#34;HMAC-SHA256&#34;, &#39;t&#39;: t}
+            refURL = &#34;https://openapi.tuyaus.com/v1.0/token/&#34; + self.refreshToken
+            resp = r.get(url=refURL, headers=self.__APIHeader, params=None).json()
+            self.tokenTimeLeft = resp[&#39;result&#39;][&#39;expire_time&#39;]
+            self.tokenGetTime = time.time()
+            self.refreshToken = resp[&#39;result&#39;][&#39;refresh_token&#39;]
+            self.__APIHeader[&#39;access_token&#39;] = resp[&#39;result&#39;][&#39;access_token&#39;]
+            refreshSignature()
+        except Exception as e:
+            raise
+
+    def printConvertedTimeLeft(self):
+        &#34;&#34;&#34;Prints the amount of time left until access token must be refreshed&#34;&#34;&#34;
+        hours = int(self.tokenTimeLeft / 3600)
+        minutes = int((self.tokenTimeLeft / 60) - hours * 60)
+        seconds = self.tokenTimeLeft % 60
+        print(f&#34;Time until key expiry: {hours} Hours, {minutes} Minutes, {seconds} Seconds&#34;)
+    
+    def addDevices(self, devices, identifier: str):
+        &#34;&#34;&#34;Adds devices to the device dictionary and gives them an easier identifier
+
+        Args:
+            devices (EasyTuya.devices): A single device object, from one of the devices in EasyTuya.devices, or a list of such objects with the same type.
+            identifier (str): The identifier to give the added device(s)
+        &#34;&#34;&#34;
+        if identifier not in self.devices.keys():
+            self.devices[identifier] = devices
+        else:
+            if type(devices) is not list:
+                self.devices[identifier].append(devices)
+            else:
+                self.devices[identifier] += devices
+        self.__initStatus(identifier)
+    
+    def sendCommands(self, destIdentifier: str, commands: dict):
+        &#34;&#34;&#34;Send commands to all devices pointed to by destIdentifier
+
+        Args:
+            destIdentifier (str): The identifier corresponding to devices added with addDevices()
+            commands (dict): The properly formatted commands to send the devices
+
+        Raises:
+            Exception: Raises an exception if destIdentifier is not a string
+            Exception: Raises an exception if destIdentifier does not exist in devices dictionary
+        &#34;&#34;&#34;
+        if time.time() - self.tokenGetTime &gt;= self.tokenTimeLeft:
+            self.refreshAccessToken()
+        elif time.time() - self.signatureGetTime &gt;= 600:
+            self.refreshSignature()
+        if type(destIdentifier) is not str:
+            raise Exception(&#34;ERROR: Command destination identifier must be passed as string&#34;)
+        if destIdentifier not in self.devices.keys():
+            raise Exception(&#34;ERROR: Command destination identifier must correspond to a device or group of devices added with addDevice() or addDeviceGroup()&#34;)
+        try:
+            if type(self.devices[destIdentifier]) != list:
+                self.devices[destIdentifier].postCommand(self.__APIHeader, commands)
+            else:
+                for d in self.devices[destIdentifier]:
+                    d.postCommand(self.__APIHeader, commands)
+        except Exception as e:
+            raise
+
+    def __initStatus(self, destID):
+        try:
+            statuses = self.getStatus(destID)
+        except Exception as e:
+            raise Exception(&#34;Something went wrong while initializing your devices&#34;)
+        else:
+            for d in statuses.keys():
+                d.setStatusInfo(statuses[d])
+
+    def getStatus(self, destIdentifier: str):
+        &#34;&#34;&#34;Retrieves the statuses of all devices pointed to by destIdentifier
+        returns 
+
+        Args:
+            destIdentifier (str): The identifier corresponding to devices added with addDevices()
+
+        Raises:
+            Exception: Raises an exception if destIdentifier is not a string
+            Exception: Raises an exception if destIdentifier does not exist in devices dictionary
+
+        Returns:
+            dict: Device statuses in the form of {deviceObject: results[{}] }
+        &#34;&#34;&#34;
+        if time.time() - self.tokenGetTime &gt;= self.tokenTimeLeft:
+            self.refreshAccessToken()
+        elif time.time() - self.signatureGetTime &gt;= 600:
+            self.refreshSignature()
+        if type(destIdentifier) is not str:
+            raise Exception(&#34;ERROR: Status destination identifier must be passed as string&#34;)
+        if destIdentifier not in self.devices.keys():
+            raise Exception(&#34;ERROR: Status destination identifier must correspond to a device or group of devices added with addDevice() or addDeviceGroup()&#34;)
+        try:
+            statusURL = &#34;https://openapi.tuyaus.com/v1.0/devices/[id]/status&#34;
+            if type(self.devices[destIdentifier]) != list:
+                thisURL = statusURL.replace(&#39;[id]&#39;, self.devices[destIdentifier].id)
+                resp = r.get(thisURL, headers=self.__APIHeader).json()
+                return {self.devices[destIdentifier]: resp[&#39;result&#39;]}
+            else:
+                statusList = {}
+                for d in self.devices[destIdentifier]:
+                    thisURL = statusURL.replace(&#39;[id]&#39;, d.id)
+                    resp = r.get(thisURL, headers=self.__APIHeader).json()
+                    statusList[d] = resp[&#39;result&#39;]
+                return statusList
+        except Exception as e:
+            raise</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="EasyTuya.TuyaAPI.TuyaAPI"><code class="flex name class">
+<span>class <span class="ident">TuyaAPI</span></span>
+<span>(</span><span>id: str, secret: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Initialize a connection with the Tuya API</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>id</code></strong> :&ensp;<code>str</code></dt>
+<dd>Your Tuya developer account client id</dd>
+<dt><strong><code>secret</code></strong> :&ensp;<code>str</code></dt>
+<dd>Your Tuya developer account access secret</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class TuyaAPI:
+
+    def __init__(self):
+        self.clientID = None
+        self.__accessKey = None
+        self.__APIHeader = {&#39;client_id&#39;: None, &#39;sign&#39;: None, &#39;sign_method&#39;: &#34;HMAC-SHA256&#34;, &#39;t&#39;: None}
+        self.devices = {}
+
+    def __init__(self, id: str, secret: str):
+        &#34;&#34;&#34;Initialize a connection with the Tuya API
+
+        Args:
+            id (str): Your Tuya developer account client id
+            secret (str): Your Tuya developer account access secret
+        &#34;&#34;&#34;
+        self.clientID = id
+        self.__accessKey = secret
+        self.devices = {}
+        try:
+            t = str(time.time() * 1000)[:13]
+            signature = HMAC.new(str.encode(self.__accessKey), str.encode(self.clientID + t), digestmod=SHA256).hexdigest().upper()
+            self.__APIHeader = {&#39;client_id&#39;: self.clientID, &#39;sign&#39;: signature, &#39;sign_method&#39;: &#34;HMAC-SHA256&#34;, &#39;t&#39;: t}
+            resp = r.get(url=&#34;https://openapi.tuyaus.com/v1.0/token?grant_type=1&#34;, headers=self.__APIHeader).json()
+            self.tokenTimeLeft = resp[&#39;result&#39;][&#39;expire_time&#39;]
+            self.tokenGetTime = time.time()
+            self.refreshToken = resp[&#39;result&#39;][&#39;refresh_token&#39;]
+            self.__APIHeader[&#39;access_token&#39;] = resp[&#39;result&#39;][&#39;access_token&#39;]
+            self.refreshSignature()
+        except Exception as e:
+            raise
+
+    def refreshSignature(self):
+        &#34;&#34;&#34;
+        Refreshes the signature in the API head with a new time
+        Needs to be done approximately every 10-20 minutes
+        &#34;&#34;&#34;
+        t = str(time.time() * 1000)[:13]
+        self.__APIHeader[&#39;sign&#39;] = HMAC.new(str.encode(self.__accessKey), str.encode(self.clientID + self.__APIHeader[&#39;access_token&#39;] + t), digestmod=SHA256).hexdigest().upper()
+        self.__APIHeader[&#39;t&#39;] = t
+        self.signatureGetTime = time.time()
+
+    def refreshAccessToken(self):
+        &#34;&#34;&#34;
+        Refresh access token for API
+        Must be done every 2 hours to maintain API access
+        &#34;&#34;&#34;
+        try:
+            t = str(time.time() * 1000)[:13]
+            signature = HMAC.new(str.encode(self.__accessKey), str.encode(self.clientID + t), digestmod=SHA256).hexdigest().upper()
+            self.__APIHeader = {&#39;client_id&#39;: self.clientID, &#39;sign&#39;: signature, &#39;sign_method&#39;: &#34;HMAC-SHA256&#34;, &#39;t&#39;: t}
+            refURL = &#34;https://openapi.tuyaus.com/v1.0/token/&#34; + self.refreshToken
+            resp = r.get(url=refURL, headers=self.__APIHeader, params=None).json()
+            self.tokenTimeLeft = resp[&#39;result&#39;][&#39;expire_time&#39;]
+            self.tokenGetTime = time.time()
+            self.refreshToken = resp[&#39;result&#39;][&#39;refresh_token&#39;]
+            self.__APIHeader[&#39;access_token&#39;] = resp[&#39;result&#39;][&#39;access_token&#39;]
+            refreshSignature()
+        except Exception as e:
+            raise
+
+    def printConvertedTimeLeft(self):
+        &#34;&#34;&#34;Prints the amount of time left until access token must be refreshed&#34;&#34;&#34;
+        hours = int(self.tokenTimeLeft / 3600)
+        minutes = int((self.tokenTimeLeft / 60) - hours * 60)
+        seconds = self.tokenTimeLeft % 60
+        print(f&#34;Time until key expiry: {hours} Hours, {minutes} Minutes, {seconds} Seconds&#34;)
+    
+    def addDevices(self, devices, identifier: str):
+        &#34;&#34;&#34;Adds devices to the device dictionary and gives them an easier identifier
+
+        Args:
+            devices (EasyTuya.devices): A single device object, from one of the devices in EasyTuya.devices, or a list of such objects with the same type.
+            identifier (str): The identifier to give the added device(s)
+        &#34;&#34;&#34;
+        if identifier not in self.devices.keys():
+            self.devices[identifier] = devices
+        else:
+            if type(devices) is not list:
+                self.devices[identifier].append(devices)
+            else:
+                self.devices[identifier] += devices
+        self.__initStatus(identifier)
+    
+    def sendCommands(self, destIdentifier: str, commands: dict):
+        &#34;&#34;&#34;Send commands to all devices pointed to by destIdentifier
+
+        Args:
+            destIdentifier (str): The identifier corresponding to devices added with addDevices()
+            commands (dict): The properly formatted commands to send the devices
+
+        Raises:
+            Exception: Raises an exception if destIdentifier is not a string
+            Exception: Raises an exception if destIdentifier does not exist in devices dictionary
+        &#34;&#34;&#34;
+        if time.time() - self.tokenGetTime &gt;= self.tokenTimeLeft:
+            self.refreshAccessToken()
+        elif time.time() - self.signatureGetTime &gt;= 600:
+            self.refreshSignature()
+        if type(destIdentifier) is not str:
+            raise Exception(&#34;ERROR: Command destination identifier must be passed as string&#34;)
+        if destIdentifier not in self.devices.keys():
+            raise Exception(&#34;ERROR: Command destination identifier must correspond to a device or group of devices added with addDevice() or addDeviceGroup()&#34;)
+        try:
+            if type(self.devices[destIdentifier]) != list:
+                self.devices[destIdentifier].postCommand(self.__APIHeader, commands)
+            else:
+                for d in self.devices[destIdentifier]:
+                    d.postCommand(self.__APIHeader, commands)
+        except Exception as e:
+            raise
+
+    def __initStatus(self, destID):
+        try:
+            statuses = self.getStatus(destID)
+        except Exception as e:
+            raise Exception(&#34;Something went wrong while initializing your devices&#34;)
+        else:
+            for d in statuses.keys():
+                d.setStatusInfo(statuses[d])
+
+    def getStatus(self, destIdentifier: str):
+        &#34;&#34;&#34;Retrieves the statuses of all devices pointed to by destIdentifier
+        returns 
+
+        Args:
+            destIdentifier (str): The identifier corresponding to devices added with addDevices()
+
+        Raises:
+            Exception: Raises an exception if destIdentifier is not a string
+            Exception: Raises an exception if destIdentifier does not exist in devices dictionary
+
+        Returns:
+            dict: Device statuses in the form of {deviceObject: results[{}] }
+        &#34;&#34;&#34;
+        if time.time() - self.tokenGetTime &gt;= self.tokenTimeLeft:
+            self.refreshAccessToken()
+        elif time.time() - self.signatureGetTime &gt;= 600:
+            self.refreshSignature()
+        if type(destIdentifier) is not str:
+            raise Exception(&#34;ERROR: Status destination identifier must be passed as string&#34;)
+        if destIdentifier not in self.devices.keys():
+            raise Exception(&#34;ERROR: Status destination identifier must correspond to a device or group of devices added with addDevice() or addDeviceGroup()&#34;)
+        try:
+            statusURL = &#34;https://openapi.tuyaus.com/v1.0/devices/[id]/status&#34;
+            if type(self.devices[destIdentifier]) != list:
+                thisURL = statusURL.replace(&#39;[id]&#39;, self.devices[destIdentifier].id)
+                resp = r.get(thisURL, headers=self.__APIHeader).json()
+                return {self.devices[destIdentifier]: resp[&#39;result&#39;]}
+            else:
+                statusList = {}
+                for d in self.devices[destIdentifier]:
+                    thisURL = statusURL.replace(&#39;[id]&#39;, d.id)
+                    resp = r.get(thisURL, headers=self.__APIHeader).json()
+                    statusList[d] = resp[&#39;result&#39;]
+                return statusList
+        except Exception as e:
+            raise</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="EasyTuya.TuyaAPI.TuyaAPI.addDevices"><code class="name flex">
+<span>def <span class="ident">addDevices</span></span>(<span>self, devices, identifier: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Adds devices to the device dictionary and gives them an easier identifier</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>devices</code></strong> :&ensp;<code><a title="EasyTuya.devices" href="devices/index.html">EasyTuya.devices</a></code></dt>
+<dd>A single device object, from one of the devices in EasyTuya.devices, or a list of such objects with the same type.</dd>
+<dt><strong><code>identifier</code></strong> :&ensp;<code>str</code></dt>
+<dd>The identifier to give the added device(s)</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def addDevices(self, devices, identifier: str):
+    &#34;&#34;&#34;Adds devices to the device dictionary and gives them an easier identifier
+
+    Args:
+        devices (EasyTuya.devices): A single device object, from one of the devices in EasyTuya.devices, or a list of such objects with the same type.
+        identifier (str): The identifier to give the added device(s)
+    &#34;&#34;&#34;
+    if identifier not in self.devices.keys():
+        self.devices[identifier] = devices
+    else:
+        if type(devices) is not list:
+            self.devices[identifier].append(devices)
+        else:
+            self.devices[identifier] += devices
+    self.__initStatus(identifier)</code></pre>
+</details>
+</dd>
+<dt id="EasyTuya.TuyaAPI.TuyaAPI.getStatus"><code class="name flex">
+<span>def <span class="ident">getStatus</span></span>(<span>self, destIdentifier: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Retrieves the statuses of all devices pointed to by destIdentifier
+returns </p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>destIdentifier</code></strong> :&ensp;<code>str</code></dt>
+<dd>The identifier corresponding to devices added with addDevices()</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>Exception</code></dt>
+<dd>Raises an exception if destIdentifier is not a string</dd>
+<dt><code>Exception</code></dt>
+<dd>Raises an exception if destIdentifier does not exist in devices dictionary</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>Device statuses in the form of {deviceObject: results[{}] }</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def getStatus(self, destIdentifier: str):
+    &#34;&#34;&#34;Retrieves the statuses of all devices pointed to by destIdentifier
+    returns 
+
+    Args:
+        destIdentifier (str): The identifier corresponding to devices added with addDevices()
+
+    Raises:
+        Exception: Raises an exception if destIdentifier is not a string
+        Exception: Raises an exception if destIdentifier does not exist in devices dictionary
+
+    Returns:
+        dict: Device statuses in the form of {deviceObject: results[{}] }
+    &#34;&#34;&#34;
+    if time.time() - self.tokenGetTime &gt;= self.tokenTimeLeft:
+        self.refreshAccessToken()
+    elif time.time() - self.signatureGetTime &gt;= 600:
+        self.refreshSignature()
+    if type(destIdentifier) is not str:
+        raise Exception(&#34;ERROR: Status destination identifier must be passed as string&#34;)
+    if destIdentifier not in self.devices.keys():
+        raise Exception(&#34;ERROR: Status destination identifier must correspond to a device or group of devices added with addDevice() or addDeviceGroup()&#34;)
+    try:
+        statusURL = &#34;https://openapi.tuyaus.com/v1.0/devices/[id]/status&#34;
+        if type(self.devices[destIdentifier]) != list:
+            thisURL = statusURL.replace(&#39;[id]&#39;, self.devices[destIdentifier].id)
+            resp = r.get(thisURL, headers=self.__APIHeader).json()
+            return {self.devices[destIdentifier]: resp[&#39;result&#39;]}
+        else:
+            statusList = {}
+            for d in self.devices[destIdentifier]:
+                thisURL = statusURL.replace(&#39;[id]&#39;, d.id)
+                resp = r.get(thisURL, headers=self.__APIHeader).json()
+                statusList[d] = resp[&#39;result&#39;]
+            return statusList
+    except Exception as e:
+        raise</code></pre>
+</details>
+</dd>
+<dt id="EasyTuya.TuyaAPI.TuyaAPI.printConvertedTimeLeft"><code class="name flex">
+<span>def <span class="ident">printConvertedTimeLeft</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Prints the amount of time left until access token must be refreshed</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def printConvertedTimeLeft(self):
+    &#34;&#34;&#34;Prints the amount of time left until access token must be refreshed&#34;&#34;&#34;
+    hours = int(self.tokenTimeLeft / 3600)
+    minutes = int((self.tokenTimeLeft / 60) - hours * 60)
+    seconds = self.tokenTimeLeft % 60
+    print(f&#34;Time until key expiry: {hours} Hours, {minutes} Minutes, {seconds} Seconds&#34;)</code></pre>
+</details>
+</dd>
+<dt id="EasyTuya.TuyaAPI.TuyaAPI.refreshAccessToken"><code class="name flex">
+<span>def <span class="ident">refreshAccessToken</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Refresh access token for API
+Must be done every 2 hours to maintain API access</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def refreshAccessToken(self):
+    &#34;&#34;&#34;
+    Refresh access token for API
+    Must be done every 2 hours to maintain API access
+    &#34;&#34;&#34;
+    try:
+        t = str(time.time() * 1000)[:13]
+        signature = HMAC.new(str.encode(self.__accessKey), str.encode(self.clientID + t), digestmod=SHA256).hexdigest().upper()
+        self.__APIHeader = {&#39;client_id&#39;: self.clientID, &#39;sign&#39;: signature, &#39;sign_method&#39;: &#34;HMAC-SHA256&#34;, &#39;t&#39;: t}
+        refURL = &#34;https://openapi.tuyaus.com/v1.0/token/&#34; + self.refreshToken
+        resp = r.get(url=refURL, headers=self.__APIHeader, params=None).json()
+        self.tokenTimeLeft = resp[&#39;result&#39;][&#39;expire_time&#39;]
+        self.tokenGetTime = time.time()
+        self.refreshToken = resp[&#39;result&#39;][&#39;refresh_token&#39;]
+        self.__APIHeader[&#39;access_token&#39;] = resp[&#39;result&#39;][&#39;access_token&#39;]
+        refreshSignature()
+    except Exception as e:
+        raise</code></pre>
+</details>
+</dd>
+<dt id="EasyTuya.TuyaAPI.TuyaAPI.refreshSignature"><code class="name flex">
+<span>def <span class="ident">refreshSignature</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Refreshes the signature in the API head with a new time
+Needs to be done approximately every 10-20 minutes</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def refreshSignature(self):
+    &#34;&#34;&#34;
+    Refreshes the signature in the API head with a new time
+    Needs to be done approximately every 10-20 minutes
+    &#34;&#34;&#34;
+    t = str(time.time() * 1000)[:13]
+    self.__APIHeader[&#39;sign&#39;] = HMAC.new(str.encode(self.__accessKey), str.encode(self.clientID + self.__APIHeader[&#39;access_token&#39;] + t), digestmod=SHA256).hexdigest().upper()
+    self.__APIHeader[&#39;t&#39;] = t
+    self.signatureGetTime = time.time()</code></pre>
+</details>
+</dd>
+<dt id="EasyTuya.TuyaAPI.TuyaAPI.sendCommands"><code class="name flex">
+<span>def <span class="ident">sendCommands</span></span>(<span>self, destIdentifier: str, commands: dict)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Send commands to all devices pointed to by destIdentifier</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>destIdentifier</code></strong> :&ensp;<code>str</code></dt>
+<dd>The identifier corresponding to devices added with addDevices()</dd>
+<dt><strong><code>commands</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The properly formatted commands to send the devices</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>Exception</code></dt>
+<dd>Raises an exception if destIdentifier is not a string</dd>
+<dt><code>Exception</code></dt>
+<dd>Raises an exception if destIdentifier does not exist in devices dictionary</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def sendCommands(self, destIdentifier: str, commands: dict):
+    &#34;&#34;&#34;Send commands to all devices pointed to by destIdentifier
+
+    Args:
+        destIdentifier (str): The identifier corresponding to devices added with addDevices()
+        commands (dict): The properly formatted commands to send the devices
+
+    Raises:
+        Exception: Raises an exception if destIdentifier is not a string
+        Exception: Raises an exception if destIdentifier does not exist in devices dictionary
+    &#34;&#34;&#34;
+    if time.time() - self.tokenGetTime &gt;= self.tokenTimeLeft:
+        self.refreshAccessToken()
+    elif time.time() - self.signatureGetTime &gt;= 600:
+        self.refreshSignature()
+    if type(destIdentifier) is not str:
+        raise Exception(&#34;ERROR: Command destination identifier must be passed as string&#34;)
+    if destIdentifier not in self.devices.keys():
+        raise Exception(&#34;ERROR: Command destination identifier must correspond to a device or group of devices added with addDevice() or addDeviceGroup()&#34;)
+    try:
+        if type(self.devices[destIdentifier]) != list:
+            self.devices[destIdentifier].postCommand(self.__APIHeader, commands)
+        else:
+            for d in self.devices[destIdentifier]:
+                d.postCommand(self.__APIHeader, commands)
+    except Exception as e:
+        raise</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="EasyTuya" href="index.html">EasyTuya</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="EasyTuya.TuyaAPI.TuyaAPI" href="#EasyTuya.TuyaAPI.TuyaAPI">TuyaAPI</a></code></h4>
+<ul class="">
+<li><code><a title="EasyTuya.TuyaAPI.TuyaAPI.addDevices" href="#EasyTuya.TuyaAPI.TuyaAPI.addDevices">addDevices</a></code></li>
+<li><code><a title="EasyTuya.TuyaAPI.TuyaAPI.getStatus" href="#EasyTuya.TuyaAPI.TuyaAPI.getStatus">getStatus</a></code></li>
+<li><code><a title="EasyTuya.TuyaAPI.TuyaAPI.printConvertedTimeLeft" href="#EasyTuya.TuyaAPI.TuyaAPI.printConvertedTimeLeft">printConvertedTimeLeft</a></code></li>
+<li><code><a title="EasyTuya.TuyaAPI.TuyaAPI.refreshAccessToken" href="#EasyTuya.TuyaAPI.TuyaAPI.refreshAccessToken">refreshAccessToken</a></code></li>
+<li><code><a title="EasyTuya.TuyaAPI.TuyaAPI.refreshSignature" href="#EasyTuya.TuyaAPI.TuyaAPI.refreshSignature">refreshSignature</a></code></li>
+<li><code><a title="EasyTuya.TuyaAPI.TuyaAPI.sendCommands" href="#EasyTuya.TuyaAPI.TuyaAPI.sendCommands">sendCommands</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.1</a>.</p>
+</footer>
+</body>
+</html>
