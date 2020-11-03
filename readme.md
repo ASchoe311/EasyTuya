@@ -22,7 +22,7 @@ EasyTuya is a module containing nearly all needed functionality for interacting 
  - Open other API group as needed by your usage
   
 # Usage
-## Full documentation can be found at [here](https://aschoe311.github.io/EasyTuya/)
+## Full documentation can be found [here](https://aschoe311.github.io/EasyTuya/)
 ### Usage example: A simple program to control a group of lights through command line input
 	from EasyTuya import TuyaAPI
 	from EasyTuya.devices import Lights
