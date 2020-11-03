@@ -19,9 +19,11 @@ EasyTuya is a module containing nearly all needed functionality for interacting 
  - Go to "Link Devices" under device management, then select the tab titled "Link devices by App Account"
  - Follow instructions on the site to add your Tuya app account and connected devices
  - Click "API Group" in the left sidebar, then click "Apply" on the groups: "Authorization Management", "Device Management", and "Device Control"
- - Open other API group as needed by your usage 
-# Usage Example
-### A simple program to control a group of lights through command line input
+ - Open other API group as needed by your usage
+  
+# Usage
+## Full documentation can be found at [here](https://aschoe311.github.io/EasyTuya/)
+### Usage example: A simple program to control a group of lights through command line input
 	from EasyTuya import TuyaAPI
 	from EasyTuya.devices import Lights
 	
