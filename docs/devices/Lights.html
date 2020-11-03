@@ -28,23 +28,23 @@
 <pre><code class="python">import requests as r
 import json
 
-&#34;&#34;&#34;Pre-formed HSV for red color&#34;&#34;&#34;
 redHSV = {&#39;h&#39;: 0, &#39;s&#39;: 255, &#39;v&#39;: 255}
-&#34;&#34;&#34;Pre-formed HSV for yellow color&#34;&#34;&#34;
+&#34;&#34;&#34;Pre-formed HSV for red color&#34;&#34;&#34;
 yellowHSV = {&#39;h&#39;: 60, &#39;s&#39;: 255, &#39;v&#39;: 255}
-&#34;&#34;&#34;Pre-formed HSV for green color&#34;&#34;&#34;
+&#34;&#34;&#34;Pre-formed HSV for yellow color&#34;&#34;&#34;
 greenHSV = {&#39;h&#39;: 120, &#39;s&#39;: 255, &#39;v&#39;: 255}
-&#34;&#34;&#34;Pre-formed HSV for sky blue color&#34;&#34;&#34;
+&#34;&#34;&#34;Pre-formed HSV for green color&#34;&#34;&#34;
 skyHSV = {&#39;h&#39;: 180, &#39;s&#39;: 255, &#39;v&#39;: 255}
-&#34;&#34;&#34;Pre-formed HSV for normal blue color&#34;&#34;&#34;
+&#34;&#34;&#34;Pre-formed HSV for sky blue color&#34;&#34;&#34;
 blueHSV = {&#39;h&#39;: 240, &#39;s&#39;: 255, &#39;v&#39;: 255}
-&#34;&#34;&#34;Pre-formed HSV for puprle color&#34;&#34;&#34;
+&#34;&#34;&#34;Pre-formed HSV for normal blue color&#34;&#34;&#34;
 purpleHSV = {&#39;h&#39;: 300, &#39;s&#39;: 255, &#39;v&#39;: 255}
-&#34;&#34;&#34;Pre-formed HSV for white color&#34;&#34;&#34;
+&#34;&#34;&#34;Pre-formed HSV for puprle color&#34;&#34;&#34;
 whiteHSV = {&#39;h&#39;: 0, &#39;s&#39;: 0, &#39;v&#39;: 255}
+&#34;&#34;&#34;Pre-formed HSV for white color&#34;&#34;&#34;
 
-&#34;&#34;&#34;Pre-formed HSV list of full color spectrum for use with scenes where colors change&#34;&#34;&#34;
 rainbowHSV = [redHSV, yellowHSV, greenHSV, skyHSV, blueHSV, purpleHSV]
+&#34;&#34;&#34;Pre-formed HSV list of full color spectrum for use with scenes where colors change&#34;&#34;&#34;
 
 def workModeCommand(wMode = &#34;white&#34;):
     &#34;&#34;&#34;Generates a command to set the work mode of lights
@@ -225,31 +225,35 @@ class Light:
 <dl>
 <dt id="EasyTuya.devices.Lights.blueHSV"><code class="name">var <span class="ident">blueHSV</span></code></dt>
 <dd>
-<div class="desc"><p>Pre-formed HSV for puprle color</p></div>
+<div class="desc"><p>Pre-formed HSV for normal blue color</p></div>
 </dd>
 <dt id="EasyTuya.devices.Lights.greenHSV"><code class="name">var <span class="ident">greenHSV</span></code></dt>
 <dd>
-<div class="desc"><p>Pre-formed HSV for sky blue color</p></div>
+<div class="desc"><p>Pre-formed HSV for green color</p></div>
 </dd>
 <dt id="EasyTuya.devices.Lights.purpleHSV"><code class="name">var <span class="ident">purpleHSV</span></code></dt>
 <dd>
-<div class="desc"><p>Pre-formed HSV for white color</p></div>
+<div class="desc"><p>Pre-formed HSV for puprle color</p></div>
 </dd>
-<dt id="EasyTuya.devices.Lights.redHSV"><code class="name">var <span class="ident">redHSV</span></code></dt>
-<dd>
-<div class="desc"><p>Pre-formed HSV for yellow color</p></div>
-</dd>
-<dt id="EasyTuya.devices.Lights.skyHSV"><code class="name">var <span class="ident">skyHSV</span></code></dt>
-<dd>
-<div class="desc"><p>Pre-formed HSV for normal blue color</p></div>
-</dd>
-<dt id="EasyTuya.devices.Lights.whiteHSV"><code class="name">var <span class="ident">whiteHSV</span></code></dt>
+<dt id="EasyTuya.devices.Lights.rainbowHSV"><code class="name">var <span class="ident">rainbowHSV</span></code></dt>
 <dd>
 <div class="desc"><p>Pre-formed HSV list of full color spectrum for use with scenes where colors change</p></div>
 </dd>
+<dt id="EasyTuya.devices.Lights.redHSV"><code class="name">var <span class="ident">redHSV</span></code></dt>
+<dd>
+<div class="desc"><p>Pre-formed HSV for red color</p></div>
+</dd>
+<dt id="EasyTuya.devices.Lights.skyHSV"><code class="name">var <span class="ident">skyHSV</span></code></dt>
+<dd>
+<div class="desc"><p>Pre-formed HSV for sky blue color</p></div>
+</dd>
+<dt id="EasyTuya.devices.Lights.whiteHSV"><code class="name">var <span class="ident">whiteHSV</span></code></dt>
+<dd>
+<div class="desc"><p>Pre-formed HSV for white color</p></div>
+</dd>
 <dt id="EasyTuya.devices.Lights.yellowHSV"><code class="name">var <span class="ident">yellowHSV</span></code></dt>
 <dd>
-<div class="desc"><p>Pre-formed HSV for green color</p></div>
+<div class="desc"><p>Pre-formed HSV for yellow color</p></div>
 </dd>
 </dl>
 </section>
@@ -722,6 +726,7 @@ Defaults to 4.</dd>
 <li><code><a title="EasyTuya.devices.Lights.blueHSV" href="#EasyTuya.devices.Lights.blueHSV">blueHSV</a></code></li>
 <li><code><a title="EasyTuya.devices.Lights.greenHSV" href="#EasyTuya.devices.Lights.greenHSV">greenHSV</a></code></li>
 <li><code><a title="EasyTuya.devices.Lights.purpleHSV" href="#EasyTuya.devices.Lights.purpleHSV">purpleHSV</a></code></li>
+<li><code><a title="EasyTuya.devices.Lights.rainbowHSV" href="#EasyTuya.devices.Lights.rainbowHSV">rainbowHSV</a></code></li>
 <li><code><a title="EasyTuya.devices.Lights.redHSV" href="#EasyTuya.devices.Lights.redHSV">redHSV</a></code></li>
 <li><code><a title="EasyTuya.devices.Lights.skyHSV" href="#EasyTuya.devices.Lights.skyHSV">skyHSV</a></code></li>
 <li><code><a title="EasyTuya.devices.Lights.whiteHSV" href="#EasyTuya.devices.Lights.whiteHSV">whiteHSV</a></code></li>

@@ -1,23 +1,23 @@
 import requests as r
 import json
 
-"""Pre-formed HSV for red color"""
 redHSV = {'h': 0, 's': 255, 'v': 255}
-"""Pre-formed HSV for yellow color"""
+"""Pre-formed HSV for red color"""
 yellowHSV = {'h': 60, 's': 255, 'v': 255}
-"""Pre-formed HSV for green color"""
+"""Pre-formed HSV for yellow color"""
 greenHSV = {'h': 120, 's': 255, 'v': 255}
-"""Pre-formed HSV for sky blue color"""
+"""Pre-formed HSV for green color"""
 skyHSV = {'h': 180, 's': 255, 'v': 255}
-"""Pre-formed HSV for normal blue color"""
+"""Pre-formed HSV for sky blue color"""
 blueHSV = {'h': 240, 's': 255, 'v': 255}
-"""Pre-formed HSV for puprle color"""
+"""Pre-formed HSV for normal blue color"""
 purpleHSV = {'h': 300, 's': 255, 'v': 255}
-"""Pre-formed HSV for white color"""
+"""Pre-formed HSV for puprle color"""
 whiteHSV = {'h': 0, 's': 0, 'v': 255}
+"""Pre-formed HSV for white color"""
 
-"""Pre-formed HSV list of full color spectrum for use with scenes where colors change"""
 rainbowHSV = [redHSV, yellowHSV, greenHSV, skyHSV, blueHSV, purpleHSV]
+"""Pre-formed HSV list of full color spectrum for use with scenes where colors change"""
 
 def workModeCommand(wMode = "white"):
     """Generates a command to set the work mode of lights
