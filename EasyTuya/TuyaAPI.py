@@ -150,12 +150,16 @@ class TuyaAPI:
             if type(self.devices[destIdentifier]) != list:
                 thisURL = statusURL.replace('[id]', self.devices[destIdentifier].id)
                 resp = r.get(thisURL, headers=self.__APIHeader).json()
+                if not 'result' in resp:
+                    raise Exception(f"ERROR: Response contains no result. Instead received: code: {resp['code']}, message: '{resp['msg']}', success: {resp['success']}")
                 return {self.devices[destIdentifier]: resp['result']}
             else:
                 statusList = {}
                 for d in self.devices[destIdentifier]:
                     thisURL = statusURL.replace('[id]', d.id)
                     resp = r.get(thisURL, headers=self.__APIHeader).json()
+                    if not 'result' in resp:
+                        raise Exception(f"ERROR: Response contains no result. Instead received: code: {resp['code']}, message: '{resp['msg']}', success: {resp['success']}")
                     statusList[d] = resp['result']
                 return statusList
         except Exception as e:
