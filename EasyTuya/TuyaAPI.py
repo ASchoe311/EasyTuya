@@ -59,7 +59,7 @@ class TuyaAPI:
             self.tokenGetTime = time.time()
             self.refreshToken = resp['result']['refresh_token']
             self.__APIHeader['access_token'] = resp['result']['access_token']
-            refreshSignature()
+            self.refreshSignature()
         except Exception as e:
             raise
 
