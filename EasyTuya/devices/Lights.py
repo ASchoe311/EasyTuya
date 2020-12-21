@@ -129,6 +129,7 @@ class Light:
         Args:
             deviceID (str): The ID of the device, found through the Tuya cloud development interface
             deviceName (str): The custom name you would like to give the light
+            base_url (str, optional): The Tuya API base URL. Choose the right one for your location. The default is 'https://openapi.tuyaus.com'
         """
         self.id = deviceID
         self.name = deviceName

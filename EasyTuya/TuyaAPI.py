@@ -18,6 +18,7 @@ class TuyaAPI:
         Args:
             id (str): Your Tuya developer account client id
             secret (str): Your Tuya developer account access secret
+            base_url (str, optional): The Tuya API base URL. Choose the right one for your location. The default is 'https://openapi.tuyaus.com'
         """
         self.clientID = id
         self.__accessKey = secret
