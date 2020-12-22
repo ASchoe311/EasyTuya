@@ -123,18 +123,20 @@ def sceneCommand(sceneNum = 4, bright = 255, freq = 191, hsvList = rainbowHSV):
 
 class Light:
 
-    def __init__(self, deviceID: str, deviceName: str):
+    def __init__(self, deviceID: str, deviceName: str, base_url: str = "https://openapi.tuyaus.com"):
         """Initialize a new light type device
 
         Args:
             deviceID (str): The ID of the device, found through the Tuya cloud development interface
             deviceName (str): The custom name you would like to give the light
+            base_url (str, optional): The Tuya API base URL. Choose the right one for your location. The default is 'https://openapi.tuyaus.com'
         """
         self.id = deviceID
         self.name = deviceName
         self.isOn = None
         self.workMode = None
         self.brightness = 0
+        self.base_url = base_url.rstrip("/")  # use the url without trailing slashes
 
     def toggleOnOff(self):
         """Generates the right on/off command based on current vals
@@ -157,7 +159,7 @@ class Light:
             Exception: Raises an exception on a failed call to Tuya API
         """
         try:
-            thisEnd = "https://openapi.tuyaus.com/v1.0/devices/[id]/commands".replace("[id]", self.id)
+            thisEnd = self.base_url + "/v1.0/devices/[id]/commands".replace("[id]", self.id)
             resp = r.post(url=thisEnd, headers=headerData, data=json.dumps(command))
             if resp.json()['success'] == False:
                 problem = "ERROR: Command failed, server response => " + json.dumps(resp.json())

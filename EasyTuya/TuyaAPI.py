@@ -10,22 +10,25 @@ class TuyaAPI:
         self.__accessKey = None
         self.__APIHeader = {'client_id': None, 'sign': None, 'sign_method': "HMAC-SHA256", 't': None}
         self.devices = {}
+        self.base_url = None
 
-    def __init__(self, id: str, secret: str):
+    def __init__(self, id: str, secret: str, base_url: str = "https://openapi.tuyaus.com"):
         """Initialize a connection with the Tuya API
 
         Args:
             id (str): Your Tuya developer account client id
             secret (str): Your Tuya developer account access secret
+            base_url (str, optional): The Tuya API base URL. Choose the right one for your location. The default is 'https://openapi.tuyaus.com'
         """
         self.clientID = id
         self.__accessKey = secret
         self.devices = {}
+        self.base_url = base_url.rstrip("/")  # use the url without trailing slashes
         try:
             t = str(time.time() * 1000)[:13]
             signature = HMAC.new(str.encode(self.__accessKey), str.encode(self.clientID + t), digestmod=SHA256).hexdigest().upper()
             self.__APIHeader = {'client_id': self.clientID, 'sign': signature, 'sign_method': "HMAC-SHA256", 't': t}
-            resp = r.get(url="https://openapi.tuyaus.com/v1.0/token?grant_type=1", headers=self.__APIHeader).json()
+            resp = r.get(url=self.base_url + "/v1.0/token?grant_type=1", headers=self.__APIHeader).json()
             self.tokenTimeLeft = resp['result']['expire_time']
             self.tokenGetTime = time.time()
             self.refreshToken = resp['result']['refresh_token']
@@ -53,7 +56,7 @@ class TuyaAPI:
             t = str(time.time() * 1000)[:13]
             signature = HMAC.new(str.encode(self.__accessKey), str.encode(self.clientID + t), digestmod=SHA256).hexdigest().upper()
             self.__APIHeader = {'client_id': self.clientID, 'sign': signature, 'sign_method': "HMAC-SHA256", 't': t}
-            refURL = "https://openapi.tuyaus.com/v1.0/token/" + self.refreshToken
+            refURL = self.base_url + "/v1.0/token/" + self.refreshToken
             resp = r.get(url=refURL, headers=self.__APIHeader, params=None).json()
             self.tokenTimeLeft = resp['result']['expire_time']
             self.tokenGetTime = time.time()
@@ -146,7 +149,7 @@ class TuyaAPI:
         if destIdentifier not in self.devices.keys():
             raise Exception("ERROR: Status destination identifier must correspond to a device or group of devices added with addDevice() or addDeviceGroup()")
         try:
-            statusURL = "https://openapi.tuyaus.com/v1.0/devices/[id]/status"
+            statusURL = self.base_url + "/v1.0/devices/[id]/status"
             if type(self.devices[destIdentifier]) != list:
                 thisURL = statusURL.replace('[id]', self.devices[destIdentifier].id)
                 resp = r.get(thisURL, headers=self.__APIHeader).json()
