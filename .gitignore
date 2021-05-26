@@ -1,7 +1,7 @@
 .vscode
 EasyTuya.egg-info
-dist
 build
 *.pyc
 EasyTuya\__pycache__
 EasyTuya\devices\__pycache__
+docs/hostyoself.exe
