@@ -64,3 +64,4 @@ To find your device IDs, go to:
 Tuya developer site -> Device Management -> Device List
 Select your correct country from the drop down near the center of the page, then your devices should show up each with their name displayed above their device id, as shown in the following image.
 ![The device list page](https://i.imgur.com/EnUXKqL.png)
+
